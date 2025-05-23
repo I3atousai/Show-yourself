@@ -1,0 +1,29 @@
+h1 {
+  text-align: center;
+  color: var(--main);
+}
+
+input {
+  border: 1px solid var(--add3);
+  display: block;
+  background-color: var(--main);
+  color: var(--text1);
+  max-width: 320px;
+  height: 45px;
+  padding: 0 10px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+input::placeholder{
+  font-weight: bold;
+  color: var(--back);
+}
+
+form button {
+  background-color: var(--main) !important;
+  color: var(--text1) !important;
+  border: 2px solid var(--add3);
+  margin-left: auto;
+  margin-right: auto;
+}

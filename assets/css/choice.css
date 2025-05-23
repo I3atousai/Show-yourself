@@ -1,0 +1,44 @@
+.logo_choice{
+  display: block;
+  opacity: 0;
+  height: 150px;
+}
+
+nav {
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 24px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main nav a {
+  width: 480px;
+  height: 45px;
+  border-radius: 6px;
+  border: 2px solid var(--add3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text1);
+  background-color: var(--main);
+}
+
+/* #exit {
+  position:sticky;
+  border-radius: 6px;
+  padding: 2px 4px 4px 4px;
+  bottom: 30px;
+  color: var(--white);
+  background-color: var(--button);
+  margin-left: 90%;
+}
+#exit:hover{
+  cursor: pointer;
+  z-index: 1;
+  background-color: var(--white);
+  color: var(--main);
+} */
+

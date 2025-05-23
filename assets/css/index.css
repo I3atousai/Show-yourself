@@ -1,0 +1,105 @@
+ fieldset{
+    min-height: 21vh;
+    /* height: fit-content; */
+    display: flex;
+    flex-direction: row;
+    max-width: max-content;
+    padding: 10px;
+    column-gap: 20px;
+    background-color: rgba(28, 26, 51, 0.466) !important;
+ }
+ input, select, textarea, .resume_button, .resume_button_add{
+    border-radius: 5px;
+    background-color: var(--input_back) !important;
+    color: var(--main) !important;
+}
+.resume_button, .resume_button_add{
+    border: 1px solid var(--add3);
+    padding: 0 5px 2px 5px;
+}
+.resume_button:hover, .resume_button_add:hover{
+    
+    background-color: var(--main) !important;
+    color: var(--input_back) !important;
+ }
+ .resume_button_add{
+   margin: auto 0;
+   width: 30%;
+   height: 20%;
+ }
+
+ .expirience {
+    min-height: 30vh;
+ }
+ .expirience section{
+    row-gap: 10px;
+ }
+ .expirience input[type="text"]:not(.for_how_long, .language){
+    min-width: 100%;
+ }
+ .language{
+    max-width: 60% !important;
+    margin-right: 10px;
+ }
+ .expirience input[type="date"]{
+    margin-left: 10px;
+    max-width: 120px;
+ }
+
+ legend{
+    padding: 0 10px;
+    color: var(--main);
+ }
+
+ section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+ }
+ .resume_text_inp{
+    padding-left: 12px ;
+    height: 40px;
+    max-width: 100%;
+ }
+
+ #img {
+    width: 150px;
+    height: 150px;
+ }
+ #avatar_input{
+    width: 1px;
+    height: 1px;
+ }
+ .input_label, .skill_label, fieldset, span{
+    margin: 7px auto 0 auto;
+    color: var(--main);
+ }
+
+ .input_label:hover, .skill_label:hover{
+    cursor: pointer;
+    color: var(--add3);
+ }
+.skill{
+
+    margin-right: 20px;
+}
+ 
+ 
+ textarea{
+    padding-left: 5px;
+    height: 70px;
+    text-wrap: wrap;
+ }
+
+ section div{
+    color: var(--main);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    line-height: -30px;
+ }
+ .more_space textarea{
+    height: 100%;
+    width: 100%;
+ }
