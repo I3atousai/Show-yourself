@@ -15,13 +15,15 @@ $new_path = $_SERVER['DOCUMENT_ROOT'] . "/assets/image/$path/$new_name";
 $url = Navigate::$URL . "/assets/image/$path/$new_name";
 
 if (move_uploaded_file($file["tmp_name"], $new_path)) {
-    if ($path == "users") {
+    if ($path == "users" && isset($_SESSION['auth'])) {
         User::update(
             ['avatar' => $new_name],
             [
                 ['id', '=', $_SESSION['auth']['id'], 'value']
             ]
         );
+    } else {
+        $_SESSION['avatar'] = $new_name;
     }
     http_response_code(200);
     echo json_encode([

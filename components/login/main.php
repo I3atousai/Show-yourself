@@ -41,7 +41,7 @@ Guard::only_guest();
                         'email' => $user['email']
                     ];
                     if ($user['role'] == 'user' || $user['role'] =='vip') {
-                        Navigate::view("users/profile?id=". $user['id'], mode:"redirect");
+                        Navigate::view("user/profile?id=". $user['id'], mode:"redirect");
                     }
                     // else {
                     //     Navigate::view('admin/panel', mode:'redirect');

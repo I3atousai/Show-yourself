@@ -34,8 +34,8 @@ class ControllerBase
         ];
         $foot = [
             'css' => [],
-            'js' => ['public/main'],
-            'service' => ['public']
+            'js' => [],
+            'service' => ['public', 'file']
         ];
         
         return [

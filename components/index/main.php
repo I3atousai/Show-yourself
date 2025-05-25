@@ -13,15 +13,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php";
         <?php if (isset($_SESSION['auth'])) { ?>
             <img class="border" id="img" src="<?php  Navigate::image("users/" . ($data['user']['avatar'] ?: "defolt.png")) ?>" alt="">
             <?php } else { ?>
-                <img class="border" id="img" src="<?php  Navigate::image("users/" . "defolt.png") ?>" alt="">
+                <img  class="border" id="img" src="<?php  Navigate::image("users/" . "defolt.png") ?>" alt="">
                 <?php } ?>
                 <label for="avatar_input" class="input_label fs20">
-                    <input type="file" id="avatar_input" style="visibility: hidden;" />
+                    <input onchange="change_avatar(this)" type="file" id="avatar_input" style="visibility: hidden;" />
                     <span><?php echo $data['text']['file_choice'] ?></span>
                 </label>
     </section>
             <section>
-                <input type="text" required class="resume_text_inp fs16 border" id="firstName" placeholder="<?php echo $data['text']['first_name'] ?>"/>
+                <input type="text" required class="resume_text_inp fs16 border" id="firstname" placeholder="<?php echo $data['text']['first_name'] ?>"/>
                 <input type="text"  class="resume_text_inp fs16 border" id="middlename" placeholder="<?php echo $data['text']['middle_name'] ?>"/>
                 <input type="text" required class="resume_text_inp fs16 border" id="secondname" placeholder="<?php echo $data['text']['second_name'] ?>"/>
             </section>
@@ -95,17 +95,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php";
 
     <fieldset class="border expirience">
         <legend class="fs20"><?php echo $data['text']['experience'] ?></legend>
-        <section>
+        <button onclick="addBlock('.job_exp')" class="resume_button_add"><?php echo $data['text']['add'] ?></button>
+        <section class="job_exp">
             <div>
                 <?php echo $data['text']['from:'] ?> <input type="date" class="resume_text_inp fs16 border exp_start"/>
                 <?php echo $data['text']['to:'] ?> <input type="date" class="resume_text_inp fs16 border exp_end"/>
             </div>
-            <input type="text" class="resume_text_inp fs16 border position" placeholder="Должность, которую вы занимали"/>
-            <input type="text"  class="resume_text_inp fs16 border org"  placeholder="Название организации"/>  
-            <textarea class="fs16 border job_desc" placeholder="Обязанности и достижения"></textarea>
-            <div><button class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
+            <input type="text" class="resume_text_inp fs16 border position" placeholder="<?php echo $data['text']['pos_you had'] ?>"/>
+            <input type="text"  class="resume_text_inp fs16 border org"  placeholder="<?php echo $data['text']['org'] ?>"/>  
+            <textarea class="fs16 border job_desc" placeholder="<?php echo $data['text']['resp_and_ach'] ?>"></textarea>
+            <div><button onclick="removeBlock(this)" class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
             </section>
-            <button class="resume_button_add"><?php echo $data['text']['add'] ?></button>
     </fieldset>
 
 
@@ -113,21 +113,22 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php";
 
     <fieldset class="border expirience">
         <legend class="fs20"><?php echo $data['text']['certifications'] ?></legend>
-        <section>
+        <button onclick="addBlock('.certification')" class="resume_button_add"><?php echo $data['text']['add'] ?></button>
+        <section class="certification">
             <input type="text"  class="resume_text_inp fs16 border studied" placeholder="<?php echo $data['text']['studied'] ?>"/>
             <input type="text"  class="resume_text_inp fs16 border for_what"  placeholder="<?php echo $data['text']['for_what'] ?>"/>  
             <div>
                 <input type="text"  class="resume_text_inp fs16 border for_how_long" placeholder="<?php echo $data['text']['for_how_long'] ?>"/>  
                 <?php echo $data['text']['finished'] ?> <input type="number" class="resume_text_inp fs16 border ended" min="1900" max="2099" step="1" value="2016" />
             </div>
-            <div><button class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
+            <div><button onclick="removeBlock(this)" class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
             </section>
-            <button class="resume_button_add"><?php echo $data['text']['add'] ?></button>
     </fieldset>
 
 
     <fieldset class="border expirience">
         <legend class="fs20"><?php echo $data['text']['education'] ?></legend>
+        <button onclick="addBlock('.education')" class="resume_button_add"><?php echo $data['text']['add'] ?></button>
         <section class="education">
             <div>
                 <label><select class="border form_of_edu">
@@ -140,15 +141,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php";
                 <?php echo $data['text']['finished'] ?> <input type="number" class="resume_text_inp fs16 border finished" min="1900" max="2099" step="1" value="2016" />
             </div>
             <input type="text"  class="resume_text_inp fs16 border where" placeholder="<?php echo $data['text']['studied'] ?>"/>
-            <input type="text"  class="resume_text_inp fs16 border faculty" id="email" placeholder="<?php echo $data['text']['faculty'] ?>"/>  
+            <input type="text"  class="resume_text_inp fs16 border faculty" placeholder="<?php echo $data['text']['faculty'] ?>"/>  
             <input type="text"  class="resume_text_inp fs16 border specialty"  placeholder="<?php echo $data['text']['for_what'] ?>"/>  
-            <div><button class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
+            <div><button  onclick="removeBlock(this)" class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
             </section>
-            <button class="resume_button_add"><?php echo $data['text']['add'] ?></button>
     </fieldset>
 
      <fieldset class="border expirience">
-        <legend class="fs20"><?php echo $data['text']['languages'] ?></legend>
+         <legend class="fs20"><?php echo $data['text']['languages'] ?></legend>
+         <button onclick="addBlock('.languages')" class="resume_button_add"><?php echo $data['text']['add'] ?></button>
         <section class="languages">
             <div>
                 <input type="text"  class="resume_text_inp fs16 border language" placeholder="<?php echo $data['text']['language'] ?>"/>  
@@ -161,30 +162,29 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php";
                     <option  value="c2"><?php echo $data['text']['c2'] ?></option>
                 </select>
             </div>
-            <div><button class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
+            <div><button  onclick="removeBlock(this)" class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
             </section>
-            <button class="resume_button_add"><?php echo $data['text']['add'] ?></button>
     </fieldset>
 
 
 
      <fieldset class="border expirience">
         <legend class="fs20"><?php echo $data['text']['pc_skills'] ?></legend>
+        <button onclick="addBlock('.pc_skill')" class="resume_button_add"><?php echo $data['text']['add'] ?></button>
         <section class="pc_skill">
             <div>
-                <input type="text"  class="resume_text_inp fs16 border language" class="skill" placeholder="c#/Microsoft Excel"/>  
+                <input type="text"  class="resume_text_inp fs16 border language skill" placeholder="c#/Microsoft Excel"/>  
                 <select class="border level">
                     <option selected value="a1s"><?php echo $data['text']['a1s'] ?></option>
-                    <option  value="a2s"><?php echo $data['text']['a2s'] ?></option>
-                    <option  value="b1s"><?php echo $data['text']['b1s'] ?></option>
-                    <option  value="b2s"><?php echo $data['text']['b2s'] ?></option>
-                    <option  value="c1s"><?php echo $data['text']['c1s'] ?></option>
-                    <option  value="c2s"><?php echo $data['text']['c2s'] ?></option>
+                    <option  value="<?php echo $data['text']['a2s'] ?>"><?php echo $data['text']['a2s'] ?></option>
+                    <option  value="<?php echo $data['text']['b1s'] ?>"><?php echo $data['text']['b1s'] ?></option>
+                    <option  value="<?php echo $data['text']['b2s'] ?>"><?php echo $data['text']['b2s'] ?></option>
+                    <option  value="<?php echo $data['text']['c1s'] ?>"><?php echo $data['text']['c1s'] ?></option>
+                    <option  value="<?php echo $data['text']['c2s'] ?>"><?php echo $data['text']['c2s'] ?></option>
                 </select>
             </div>
-            <div><button class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
+            <div><button  onclick="removeBlock(this)" class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
             </section>
-            <button class="resume_button_add"><?php echo $data['text']['add'] ?></button>
     </fieldset>
 
 
@@ -218,33 +218,41 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php";
 
     <fieldset class="border more_space">
         <legend class="fs20 more_space"><?php echo $data['text']['personal_char'] ?></legend>
-        <textarea id="personal"><?php echo $data['text']['im_social'] ?></textarea>
+        <textarea id="personal" placeholder="<?php echo $data['text']['im_social'] ?>"></textarea>
     </fieldset>
     <fieldset class="border more_space">
         <legend class="fs20"><?php echo $data['text']['professional_char'] ?></legend>
-        <textarea id="professional"><?php echo $data['text']['im_precise'] ?></textarea>
+        <textarea id="professional" placeholder="<?php echo $data['text']['im_precise'] ?>"></textarea>
     </fieldset>
 
-    <fieldset class="border">
+    <fieldset class="border socials">
         <legend class="fs20"><?php echo $data['text']['social_links'] ?></legend>
-        <section>
+        <button onclick="addBlock('.social')" class="resume_button_add"><?php echo $data['text']['add'] ?></button>
+        <section class="social">
             <div>
                 <input type="text"  class="resume_text_inp fs16 border link_to_social" placeholder="https://vk.com/..."/>  
                 <select class="border which_social">
-                    <option value="vk">Vk</option>
-                    <option value="li">LinkedIn</option>
-                    <option value="li">Facebook</option>
-                    <option value="li">Twitter</option>
-                    <option value="li">GitHub</option>
-                    <option value="li">Instagramm</option>
-                    <option value="li">Pinterest</option>
-                    <option value="li">Patreon</option>
-                    <option value="li">Youtube</option>
-                    <option value="li">Tiktok</option>
+                    <option value="Vk">Vk</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Twitter">Twitter</option>
+                    <option value="GitHub">GitHub</option>
+                    <option value="Instagramm">Instagramm</option>
+                    <option value="Pinterest">Pinterest</option>
+                    <option value="Patreon">Patreon</option>
+                    <option value="Youtube">Youtube</option>
+                    <option value="Tiktok">Tiktok</option>
                 </select>
             </div>
-            <div><button class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
+            <div><button  onclick="removeBlock(this)" class="resume_button"><?php echo $data['text']['delete'] ?></button></div>
             </section>
-            <button class="resume_button_add"><?php echo $data['text']['add'] ?></button>
     </fieldset>
+    <!-- <button onclick="makeResume()" class="resume_button_add"><?php // echo $data['text']['make'] ?></button> -->
+    <button onclick="send_resume()" class="resume_button_add fs40"><?php echo $data['text']['make'] ?></button>
 </div>
+<script>
+    let usr_logged = false
+    <?php if (isset($_SESSION['auth'])) { ?>
+        usr_logged = true;
+   <?php }?>
+</script>

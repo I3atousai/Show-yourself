@@ -208,6 +208,10 @@ class TranslationFiles
             'im_precise' => 'Я пунктуальный...',
             'social_links' => 'Ссылки на соцсети',
             'language' => 'Язык',
+            'pos_you had' => 'Должность, которую вы занимали',
+            'org' => 'Название организации',
+            'resp_and_ach' => 'Обязанности и достижения',
+            'make' => 'Создать',
         ];
         $english = [
     'my_name' => "My name",
@@ -249,7 +253,7 @@ class TranslationFiles
     'bachelour' => 'Bachelor',
     'master' => 'Master',
     'phd' => 'PhD',
-    'dr' => 'Doctor of Sciences',
+    'dr' => 'Doctor',
     'experience' => 'Work experience',
     'from:' => 'From: ',
     'to:' => 'To: ',
@@ -294,7 +298,11 @@ class TranslationFiles
     'im_social' => 'I am sociable...',
     'im_precise' => 'I am punctual...',
     'social_links' => 'Social media links',
-    'language' => 'Language'
+    'language' => 'Language',
+    'pos_you had' => 'Position you occupied',
+    'org' => 'Organisation name',
+    'resp_and_ach' => 'Responsibilities and achievements',
+    'make' => 'Create!',
 ];
     switch (self::$language) {
     case 'ru':

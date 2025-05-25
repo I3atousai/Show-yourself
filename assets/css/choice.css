@@ -26,6 +26,11 @@ main nav a {
   background-color: var(--main);
 }
 
+footer{
+  bottom: 0;
+  position: absolute;
+}
+
 /* #exit {
   position:sticky;
   border-radius: 6px;
