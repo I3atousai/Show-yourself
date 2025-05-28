@@ -98,6 +98,10 @@
     margin-right: 20px;
 }
  
+
+.check{
+   justify-content: space-between;
+}
  
  textarea{
     padding-left: 5px;

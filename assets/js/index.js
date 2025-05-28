@@ -1,7 +1,66 @@
 
 
-
+let resume='';
 const language = document.getElementById('language').value;
+let translation = language === 'ru' ? {
+    salary: "Оплата",
+    schedule: "График",
+    certifications: "Сертификации",
+
+    marital_status: "Семейное положение",
+    military: "Военный билет",
+    yes: "Есть",
+    no: "Нет",
+    have_kids: "Есть дети",
+    about_me: "Обо мне",
+    professional: "Мои профессиональные качества",
+    
+    med: "Медкнижка",
+    drive: "Права категории",
+    education: "Образование",
+    year: "Год",
+    per: "Период",
+    specialty: "Специальность",
+    faculty: "Факультет",
+    institute: "Учебное заведение",
+    position: "Должность и обязанности",
+    period: "Период",
+    expierence: "Опыт работы",
+    contact: "Контактная информация",
+    qualifications: "Ключевые квалификации",
+    extra_info : "Дополнительная информация"
+}
+                                    :{
+    
+    salary: "Salary",
+    schedule: "Schedule",
+    certifications: "Certifications",
+    marital_status: "Marital status",
+    military: "Military ticket",
+    yes: "Have",
+    no: "Dont have",
+    have_kids: "I have kids",
+    about_me: "About me",
+    professional: "My professional traits",
+    med:"Medical Certificate",
+    drive: "Driver\'s license",
+
+    education: "Education",
+    year: "Year",
+    per: "Period",
+    specialty: "Specialty",
+    faculty: "Faculty",
+    institute: "Educational institution",
+    position: "Position",
+    period: "Working Period",
+    expierence: "Expierence",
+    contact: "Contact Info",
+    qualifications: "Key Qualifications",
+    extra_info : "Extra info"
+};
+
+console.log(translation.extra_info);
+
 
 const getResumeData = () => {
   return {
@@ -77,14 +136,15 @@ const getResumeData = () => {
 };
 
 
-// const resumeData = getResumeData();
-// console.log(resumeData.experience[0].position); 
-
-
-
 
 // ADDING AND REMOVING SECTIONS START
 //templates
+let pc_skill_elements = 1
+let experience_elements = 1
+let certification_elements = 1
+let education_elements = 1
+let languages_elements = 1
+let social_elements = 1
 const pc_skill = document.querySelector('.pc_skill');
 const pc_skill_parent = pc_skill.parentElement;
 const experience = document.querySelector('.job_exp');
@@ -101,22 +161,58 @@ const social_parent = social.parentElement;
 function addBlock(el) {
     switch (el) {
         case '.pc_skill':
-            pc_skill_parent.innerHTML += pc_skill.outerHTML;
+            if (pc_skill_elements < 6) {
+                var new_skill = document.createElement('section') 
+                new_skill.innerHTML = pc_skill.innerHTML
+                new_skill.id = 'skill' + (++pc_skill_elements)
+                new_skill.classList.add("pc_skill")
+                pc_skill_parent.appendChild(new_skill) ;
+            }
         break;
         case '.job_exp':
-            experience_parent.innerHTML += experience.outerHTML;
+            if (experience_elements < 6) {
+                var new_job_exp = document.createElement('section') 
+                new_job_exp.innerHTML = experience.innerHTML
+                new_job_exp.id = 'exp' + (++experience_elements)
+                new_job_exp.classList.add("job_exp")
+                experience_parent.appendChild(new_job_exp) ;
+            }
         break;
         case '.certification':
-            certification_parent.innerHTML += certification.outerHTML;
+            if (certification_elements < 6) {
+                var new_crt = document.createElement('section') 
+                new_crt.innerHTML = certification.innerHTML
+                new_crt.id = 'crt' + (++certification_elements)
+                new_crt.classList.add("certification")
+                certification_parent.appendChild(new_crt) ;
+            }
         break;
         case '.education':
-            education_parent.innerHTML += education.outerHTML;
+            if (education_elements < 6) {
+                var new_edu = document.createElement('section') 
+                new_edu.innerHTML = education.innerHTML
+                new_edu.id = 'edu' + (++education_elements)
+                new_edu.classList.add("education")
+                education_parent.appendChild(new_edu) ;
+            }
         break;
         case '.languages':
-            languages_parent.innerHTML += languages.outerHTML;
+           if (languages_elements < 6) {
+                var new_lang = document.createElement('section') 
+                new_lang.innerHTML = languages.innerHTML
+                new_lang.id = 'lang' + (++languages_elements)
+                new_lang.classList.add("languages")
+                languages_parent.appendChild(new_lang) ;
+            }
         break;
         case '.social':
-            social_parent.innerHTML += social.outerHTML;
+            if (social_elements < 6) {
+                var new_social = document.createElement('section') 
+                new_social.innerHTML = social.innerHTML
+                new_social.id = 'social' + (++social_elements)
+                new_social.classList.add("social")
+                social_parent.appendChild(new_social) ;
+            }
         break;
     }
     
@@ -124,6 +220,31 @@ function addBlock(el) {
 
 
 function removeBlock  (el) {
+    var par_class = el.parentElement.parentElement.classList[0];
+    console.log(par_class);
+    
+    switch (par_class) {
+        case 'pc_skill':
+            console.log(pc_skill_elements);
+            pc_skill_elements--;
+        break;
+        case 'job_exp':
+           experience_elements--;
+        break;
+        case 'certification':
+            certification_elements--;
+        break;
+        case 'education':
+            education_elements--;
+        break;
+        case 'languages':
+            languages_elements--;
+        break;
+        case 'social':
+            social_elements--;
+        break;
+    }
+    
     let parent = el.parentElement.parentElement.remove();
 }
 // ADDING AND REMOVING SECTIONS END
@@ -139,10 +260,10 @@ function verify(resumeData) {
     resumeData.personal.email  === "" ) {
         if (language === 'ru') {
                     alert('Пожалуйста, заполните данные в поле имени, телефона и почты')
-                    return;
+                    return false;
                 } else if (language === 'en'){
                     alert('Please, fill in your name, phone and email')
-                    return;
+                    return false;
                 }
     }
 
@@ -153,10 +274,10 @@ function verify(resumeData) {
      ) {
         if (language === 'ru') {
             alert('Пожалуйста, заполните данные о желаемой работе')
-            return;
+                    return false;
         } else if (language === 'en'){
             alert('Please, fill in your position preferences')
-            return;
+                    return false;
         }
     }
     
@@ -167,10 +288,10 @@ function verify(resumeData) {
                 console.log(resumeData.experience[exp][key]);
                 if (language === 'ru') {
                     alert('Пожалуйста, заполните все данные в поле опыта работы, или удалите его');
-                    return;
+                    return false;
                 } else if (language === 'en'){
                     alert('Please, fill in job experience data, or delete it');
-                    return;
+                    return false;
                 }
             }
         }
@@ -181,10 +302,10 @@ function verify(resumeData) {
                 console.log(resumeData.certifications[crt][key]);
                 if (language === 'ru') {
                     alert('Пожалуйста, заполните все данные в поле сертификации, или удалите его');
-                    return;
+                    return false;
                 } else if (language === 'en'){
                     alert('Please, fill in certification data, or delete it');
-                    return;
+                    return false;
                 }
             }
         }
@@ -195,10 +316,10 @@ function verify(resumeData) {
                 console.log(resumeData.education[edu][key]);
                 if (language === 'ru') {
                     alert('Пожалуйста, заполните все данные в поле образования, или удалите его');
-                    return;
+                    return false;
                 } else if (language === 'en'){
                     alert('Please, fill in education data, or delete it');
-                    return;
+                    return false;
                 }
             }
         }
@@ -209,10 +330,10 @@ function verify(resumeData) {
                 console.log(resumeData.languages[lang][key]);
                 if (language === 'ru') {
                     alert('Пожалуйста, заполните все данные в поле знания языков, или удалите его');
-                    return;
+                    return false;
                 } else if (language === 'en'){
                     alert('Please, fill in language data, or delete it');
-                    return;
+                    return false;
                 }
             }
         }
@@ -223,10 +344,10 @@ function verify(resumeData) {
                 console.log(resumeData.pcSkills[skill][key]);
                 if (language === 'ru') {
                     alert('Пожалуйста, заполните все данные в поле навыков владения компьютером, или удалите его');
-                    return;
+                    return false;
                 } else if (language === 'en'){
                     alert('Please, fill in pc skills data, or delete it');
-                    return;
+                    return false;
                 }
             }
         }
@@ -237,179 +358,214 @@ function verify(resumeData) {
                 console.log(resumeData.socials[link][key]);
                 if (language === 'ru') {
                     alert('Пожалуйста, заполните все данные в поле ссылок на соцсети, или удалите их');
-                    return;
+                    return false;
                 } else if (language === 'en'){
                     alert('Please, fill in social media data, or delete it');
-                    return;
+                    return false;
                 }
             }
         }
     }
+    return true;
 }
+
 
 
 
 function makeResume() {
     const resumeData = getResumeData();
-    // verify(resumeData);
-    // for different templates switch the style block
-
-    let style = {
-        default: `@page { size: A4; margin: 0; }
-                .upper{
-                    display: flex;flex-direction: row; column-gap: 20px;
-                }
-                body {width: 210mm; height: 297mm;margin: 0;
-                padding: 15mm; box-sizing: border-box;
-                font-family: Arial, sans-serif; line-height: 1.6;}
-                h1{color: #2c3e50 ; }
-                .section {margin-bottom: 15px; border: 2px solid black;
-                        border-radius: 8px;padding: 5px;}
-                .header {text-align: left; border: 2px solid #3498db;
-                width: 50%; padding: 5px;
-                border-radius: 8px;margin-bottom: 10px;}
-                .rest_of_data{display: grid; 
-                    grid-template-columns: 1fr 1fr 1fr;column-gap: 20px;}
-                .contact_info {margin: 10px 0;}`
+    if(verify(resumeData) === false){
+        return;
     }
 
-    let resume = `
+     resume += `
     <!DOCTYPE html>
-        <html lang="en">
+        <html lang="${language}">
         <head>
-             <style>
-                ${style.default}
-            </style>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+             <style></style>
             <meta charset="UTF-8">
         </head>
         <body>
-        <div class="upper">
-            <div class="header">
+        <table class="no-border">
+            <tr>
+             <td width="60%" class="no-border">
+             <img id="img" src="http://showyourself/assets/image/users/defolt.png" alt="">
                 <h1>${resumeData.personal.firstName+ " "+resumeData.personal.middleName+ " "+resumeData.personal.lastName }</h1>`
-                resume += `<div class="contact_info">
+                
+                          resume +=  `<p><strong>${resumeData.jobPreferences.position}</strong></p>
+                           <p>${translation.salary}: ${resumeData.jobPreferences.salary}</p>
+                            <p>${translation.schedule}: ${resumeData.jobPreferences.schedule}, ${resumeData.jobPreferences.occupationType}</p>`
+                            
+                    resume += resumeData.personalDetails.date !=="" ? `<p>${resumeData.personalDetails.date}</p>` : "";
+                    resume += resumeData.personalDetails.city !=="" ? `<p>${resumeData.personalDetails.city + " "+(resumeData.personalDetails.citizenship !=="" ? resumeData.personalDetails.citizenship: "")} </p>` : "";
+                    resume += `</td>
+                            <td width="40%" class="no-border">
+                            <p><strong>${translation.contact}:</strong></p>
                             <p>${resumeData.personal.phone}</p>
                             <p>${resumeData.personal.email}</p>
                 `
+                
                 if (typeof(resumeData.socials[0]) !== "undefined") {
                     for (const link in resumeData.socials) {
                             resume += `<p>${resumeData.socials[link].which_social + ": " + resumeData.socials[link].link_to_social}</p>`
-                        
-                    }
+                            
+                        }
                 }   
-                resume += '</div>'
-            resume += '</div>'
-            resume += `<div class="header">
-                            <h2>${resumeData.jobPreferences.position}</h2>
-                            <p>${resumeData.jobPreferences.salary}</p>
-                            <p>${resumeData.jobPreferences.occupationType}</p>
-                            <p>${resumeData.jobPreferences.schedule}</p> ` 
-            resume += '</div>'
-        resume += '</div>'
-        resume += '<div class="rest_of_data">'
-        
-        if (typeof(resumeData.certifications[0]) !== "undefined"){
-            resume += '<div class="section">'
-            for (const index in resumeData.certifications) {
-                var crt =  resumeData.certifications[index]
-                    `<h2>${crt.for_what}</h2>
-                    <p>${crt.studied}</p>
-                    <p>${crt.ended+" - "+crt.for_how_long}</p>
-                    `
+                resume += `</td>
+                        </tr>
+                    </table>
+                `
+
+                if ((typeof(resumeData.pcSkills[0]) !== "undefined") || typeof(resumeData.languages[0]) !== "undefined") {
                     
+                    resume += `<div class="section-title">${translation.qualifications}</div>
+                                <table>
+                                    <tr>
+                                        <td width="50%">
+                                            <ul>`
+                                    if (typeof(resumeData.languages[0]) !== "undefined"){
+                                                for (const index in resumeData.languages) {
+                                                    var lang =  resumeData.languages[index]
+                                                    resume += `<li>${lang.language+" - "+lang.language_level}</li>`
+                                                    }
+                                                }
+                                    if (typeof(resumeData.pcSkills[0]) !== "undefined"){
+                                                for (const index in resumeData.pcSkills) {
+                                                    var skill =  resumeData.pcSkills[index]
+                                                resume += `  <li>${skill.skill+" - "+skill.skill_level}</li>`
+                                                    }
+                                                }
+                                resume += ` </ul>
+                                        </td>
+                                    </tr>
+                                </table>`
+                                            
                 }
-                resume += "</div>"
-            }
-            if (typeof(resumeData.education[0]) !== "undefined"){
-                for (const index in resumeData.education) {
-                    var edu =  resumeData.education[index]
-                    resume += `<div class="section">
-                    <h2>${edu.specialty}</h2>
-                    <p>${edu.where}</p>
-                    <p>${edu.faculty}</p>
-                    <p>${edu.studied}</p>
-                    <p>${edu.form+" - "+edu.finished}</p>
-                    </div>
-                    `
-                }
-                resume += "</div>"
-            }
             if (typeof(resumeData.experience[0]) !== "undefined"){
+            resume += `<div class="section-title">${translation.expierence}</div>`
+                
                 for (const index in resumeData.experience) {
                     var exp =  resumeData.experience[index]
-                    resume += `<div class="section">
-                    <h2>${exp.specialty}</h2>
-                    <h2>${exp.where}</h2>
-                    <h2>${exp.faculty}</h2>
-                    <p>${exp.studied}</p>
-                    <p>${exp.form+" - "+exp.finished}</p>
-                    </div>
+                    resume += `<table>
+                                <tr class="header">
+                                    <th width="30%">${translation.period}</th>
+                                    <th width="70%">${translation.position}</th>
+                                </tr>
+                                <tr>
+                                    <td>${translation.per}: ${exp.startDate+" - "+exp.endDate}</td>
+                                    <td>
+                                    <strong>${exp.position}</strong>
+                                    - ${exp.company}
+                                    - ${exp.description}
+                                    </td>
+                                </tr>
+                            </table>
+                            `
+                }
+            }
+            if (typeof(resumeData.education[0]) !== "undefined"){
+                resume += `<div class="section-title">${translation.education}</div>`
+                for (const index in resumeData.education) {
+                    var edu =  resumeData.education[index]
+                    resume += `<table>
+                                    <tr class="header">
+                                        <th width="30%">${translation.year}</th>
+                                        <th width="70%">${translation.institute}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>${translation.per}: ${edu.form+" - "+edu.finished}</td>
+                                        <td>
+                                            <strong>${edu.where}</strong><br/>
+                                            ${translation.specialty}: ${edu.specialty} 
+                                                ${edu.studied}
+                                            ${translation.education}: ${edu.faculty}
+                                        </td>
+                                    </tr>
+                                </table>
                     `
                 }
             }
-            if (typeof(resumeData.languages[0]) !== "undefined"){
-                resume += '<div class="section">'
-                for (const index in resumeData.languages) {
-                    var lang =  resumeData.languages[index]
-                    resume += `<p>${lang.language+" - "+lang.language_level}</p>`
+            if (typeof(resumeData.certifications[0]) !== "undefined"){
+                resume += `<div class="section-title">${translation.certifications}</div>`
+                for (const index in resumeData.certifications) {
+                    var crt =  resumeData.certifications[index]
+                    resume += `<table>
+                                    <tr class="header">
+                                        <th width="30%">${translation.year}</th>
+                                        <th width="70%">${translation.institute}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>${translation.per}: ${crt.ended+" - "+crt.for_how_long}</td>
+                                        <td>
+                                            <strong>${crt.for_what}</strong><br/>
+                                            ${translation.specialty}: ${crt.studied} 
+                                        </td>
+                                    </tr>
+                                </table>
+                    `
                 }
-            resume += '</div>'
             }
-            if (typeof(resumeData.pcSkills[0]) !== "undefined"){
-                resume += '<div class="section">'
-                for (const index in resumeData.pcSkills) {
-                    var skill =  resumeData.pcSkills[index]
-                  resume += `  <p>${skill.skill+" - "+skill.skill_level}</p>`
-                    }
-            resume += '</div>'
-                    }
 
-                    //personal info
-                resume += '<div class="section">'
-                    resume += resumeData.personalDetails.date !=="" ? `<p>${resumeData.personalDetails.date}</p>` : "";
-                    resume += resumeData.personalDetails.city !=="" ? `<p>${resumeData.personalDetails.city}</p>` : "";
-                    resume += resumeData.personalDetails.citizenship !=="" ? `<p>${resumeData.personalDetails.citizenship}</p>` : "";
-                    resume += resumeData.personalDetails.is_married ? `<p>${resumeData.personalDetails.is_married}</p>` : "";
-                    resume += resumeData.personalDetails.has_kids ? `<p>Есть дети</p>` : "";
-                    resume += (resumeData.personalDetails.gender !== "Скрыть" || resumeData.personalDetails.gender !== "Hide") ? `<p>${resumeData.personalDetails.gender}</p>` : "";
-                    resume += `<p>${resumeData.personalDetails.degree}</p>` ;
-                resume += '</div>'
+            resume += `<div class="section-title">${translation.extra_info}</div>
+                        <table>
+                            <tr>
+                                <td width="50%">`
+                                resume += resumeData.personalDetails.is_married ? (`<strong>${translation.marital_status}: </strong>` + resumeData.personalDetails.is_married + "<br/>") : "";
+                                resume += `<strong>${translation.military}: </strong>`
+                                resume +=  resumeData.personalDetails.military ? translation.yes+"<br/>" : translation.no+"<br/>";
+                                resume += (resumeData.personalDetails.gender !== "Скрыть" || resumeData.personalDetails.gender !== "Hide") ? `${resumeData.personalDetails.gender + "<br/>"}` : "";
+                                resume += resumeData.personalDetails.has_kids ? translation.have_kids+`<br/>` : "";
+                               resume += '</td>'
+                  resume +=`  <td width="50%">
+                                    <strong>${translation.med}:</strong> ${resumeData.personalDetails.med ? translation.yes : translation.no} <br/>`
+                                    resume += resumeData.extra.driver_A ? `<strong>${translation.drive} А</strong><br/>` : "";
+                                    resume += resumeData.extra.driver_B ? `<strong>${translation.drive} B</strong><br/>` : "";
+                                    resume += resumeData.extra.driver_C ? `<strong>${translation.drive} C</strong><br/>` : "";
+                                    resume += resumeData.extra.driver_D ? `<strong>${translation.drive} D</strong><br/>` : "";
+                                    resume += resumeData.extra.driver_E ? `<strong>${translation.drive} E</strong><br/>` : "";
+            resume +=`        </td>
+                        </tr>
+                    </table>
+                    `
+            
+            
                 //extra info
-                resume += '<div class="section">'
-                    resume += resumeData.extra.military ? "<p>Был в армии</p>" : "";
-                    resume += resumeData.extra.med ? "<p>Есть действующая медкнижка</p>" : "";
-                    resume += resumeData.extra.driver_A ? "<p>Права категории А</p>" : "";
-                    resume += resumeData.extra.driver_B ? "<p>Права категории B</p>" : "";
-                    resume += resumeData.extra.driver_C ? "<p>Права категории C</p>" : "";
-                    resume += resumeData.extra.driver_D ? "<p>Права категории D</p>" : "";
-                    resume += resumeData.extra.driver_E ? "<p>Права категории E</p>" : "";
-                resume += '</div>'
-                resume += '<div class="section">'
-                resume += resumeData.about_me.personal_char ? resumeData.about_me.personal_char : "";
-                resume += '</div>'
-                resume += '<div class="section">'
-                resume += resumeData.about_me.professional_char ? resumeData.about_me.professional_char : "";
-                resume += '</div>'
-            resume += '</div>'
+                resume += resumeData.about_me.personal_char ? (`<div class="section-title">${translation.about_me}</div>
+                    <table>
+                            <tr>
+                                <td width="100%">
+                                    ${resumeData.about_me.personal_char}
+                                </td>
+                            </tr>
+                        </table>
+                    `) : "";
+                resume += resumeData.about_me.professional_char ? (`<div class="section-title">${translation.professional}</div>
+                    <table>
+                            <tr>
+                                <td width="100%">
+                                    ${resumeData.about_me.professional_char}
+                                </td>
+                            </tr>
+                        </table>
+                    `) : "";
            resume +=  "</body></html>"
                 // console.log(resume);
 
-
-                 
             check_user();
-            send_avatar(resumeData.personal.avatar);
-            send_resume();
-        // social_parent.innerHTML = resume;
 }
 
-function send_resume(resume) {
+function send_resume() {
+    
     const formData = new FormData()
-                formData.append("resume", resume)
+                formData.append("html", resume);
+                formData.append("style", "default");
                 $.ajax({
                 url: `${BASE_URL}/middleware/resume/resume_to_sql.php`,
                 method: "post",
                 processData: false,
                 contentType: false,
-                data: formDataNoted,
+                data: formData,
                 dataType: "json"
             })
 }
@@ -420,9 +576,9 @@ function change_avatar() {
     let img = document.getElementById("img");
     download_file(avatar, path)
         .then(data => {
-            console.log(data.url);
-            
             img.src = data.url
+            const d = new Date();
+            document.cookie=`avatar=${data.url}; expires=${d.setTime(d.getTime() + (2*24*60*60*1000))}; path=/`
         })
         .catch(err => console.log(err))
 }
@@ -431,6 +587,7 @@ function change_avatar() {
 
 function check_user() {
     if (usr_logged === true) {
+        send_resume(resume);
         alert("Можете скачать резюме в личном кабинете")
         return;
     } else {
@@ -444,14 +601,14 @@ function reg() {
    var password = Math.floor(Math.random()* (99999999 - 10000000) + 10000000)+"rd"
 //    document.cookie = `username=${resumeData.personal.firstName}`;
 //    document.cookie = `password=${password}`;
-   console.log(BASE_URL);
    
    const formData = new FormData()
                 formData.append("name", resumeData.personal.firstName)
                 formData.append("email", resumeData.personal.email)
                 formData.append("password", password)
                 formData.append("phone", resumeData.personal.phone)
-
+                formData.append("resume", resume)
+                formData.append("style", 'default')
                 //Here i send user data to sql and send hil login details on email
                 $.ajax({
                 url: `${BASE_URL}/middleware/public/send_login_info.php`,
@@ -467,7 +624,7 @@ function reg() {
                 processData: false,
                 contentType: false,
                 data: formData,
-                dataType: "json"
+                dataType: "html"
             }).then(
 
                 alert("На вашу почту было послано письмо с логином и паролем. Вы можете скачать резюме после входа в личный кабинет.")

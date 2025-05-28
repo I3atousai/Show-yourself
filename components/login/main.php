@@ -38,8 +38,9 @@ Guard::only_guest();
                     $_SESSION['auth'] = [
                         'role' => $user['role'],
                         'id' => $user['id'],
-                        'email' => $user['email']
+                        'email' => $user['email'],
                     ];
+                    setcookie( 'avatar', 'http://showyourself/assets/image/users/'.$user['avatar'], 0, '/');
                     if ($user['role'] == 'user' || $user['role'] =='vip') {
                         Navigate::view("user/profile?id=". $user['id'], mode:"redirect");
                     }

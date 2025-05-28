@@ -40,6 +40,32 @@ class TranslationFiles
 }
         return $lines;
     }
+    public static function set_profile_text():array{
+
+        $lines = [];
+        $russian = [
+            'your_resumes' => "Ваши Резюме",
+            'exit' => "Выход",
+            'delete' => "Удалить",
+            
+            
+        ];
+        $english = [
+             'your_resumes' => "Your Resume's",
+            'exit' => "Log out",
+            'delete' => "delete",
+        ];
+    switch (self::$language) {
+    case 'ru':
+        $lines = $russian;
+        break;
+        
+        case 'en':
+        $lines = $english;
+        break;
+}
+        return $lines;
+    }
     public static function set_registration_text():array{
 
         $lines = [];
@@ -208,7 +234,7 @@ class TranslationFiles
             'im_precise' => 'Я пунктуальный...',
             'social_links' => 'Ссылки на соцсети',
             'language' => 'Язык',
-            'pos_you had' => 'Должность, которую вы занимали',
+            'pos_you_had' => 'Должность, которую вы занимали',
             'org' => 'Название организации',
             'resp_and_ach' => 'Обязанности и достижения',
             'make' => 'Создать',
@@ -249,7 +275,7 @@ class TranslationFiles
     'female' => 'Female',
     'hidden' => 'Hide',
     'high_school' => 'Secondary education',
-    'college' => 'Vocational education',
+    'college' => 'Сollege',
     'bachelour' => 'Bachelor',
     'master' => 'Master',
     'phd' => 'PhD',
@@ -299,7 +325,7 @@ class TranslationFiles
     'im_precise' => 'I am punctual...',
     'social_links' => 'Social media links',
     'language' => 'Language',
-    'pos_you had' => 'Position you occupied',
+    'pos_you_had' => 'Position you occupied',
     'org' => 'Organisation name',
     'resp_and_ach' => 'Responsibilities and achievements',
     'make' => 'Create!',

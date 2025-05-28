@@ -1,12 +1,15 @@
 1: send user picture to the sql and data base DONE
-2: send html resume to the sql
+2: send html resume to the sql DONE
 3: fix button styles in index.php DONE
-4: display resume's in user profile 
-5: make PDF files from html in sql
-6: make DOCX files from html in sql
-7: translate resume text to english
+4: display resume's in user profile DONE
+5: make PDF files from html in sql  DONE
+6: make DOCX files from html in sql FAILED
+7: translate resume text to english DONE
+8: deal with styling DONE
+9: resume delition DONE
+10: translate user page to english DONE
 
-How do i get user id to create the resume...
+How do i get user id to create the resume... just dont be dumb
 
 
 https://www.photopea.com/

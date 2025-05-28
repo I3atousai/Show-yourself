@@ -1,11 +1,13 @@
 <?php
 namespace App\Controller;
 
-use App\Model\Resume;
+use App\Service\TranslationFiles;
+
 session_start();
 use App\Controller\ControllerBase;
-use App\Model\User;
 use App\Service\Guard;
+use App\Model\Resume;
+use App\Model\User;
 
 class ProfileController extends ControllerBase
 {
@@ -28,7 +30,9 @@ class ProfileController extends ControllerBase
         return [
             ...$files,
             "user" => $user,
-            'resumes' => $resumes
+            'resumes' => $resumes,
+            'text' => TranslationFiles::set_profile_text(),
+
         ];
     }
 }

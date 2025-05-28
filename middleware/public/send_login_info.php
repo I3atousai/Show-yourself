@@ -1,6 +1,13 @@
 <?php
+
+use App\Model\User;
 require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php";
 session_start();
+
+if(User::query( get: ['*'], params: [['email', '=', $_POST['email'], 'value',],]))
+{
+    echo "Не удалось добавить пользователя, или такой пользователь уже существует\nUnable to add user/User already exists";
+} else {
 
 $santa_email = $_POST['email'];
 $user = $_POST['name'];
@@ -25,3 +32,4 @@ try {
     echo $th->getMessage();
 }
 
+}
